@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Wizfits Client">
+    <output-path>$PROJECT_DIR$/</output-path>
+    <root id="archive" name="Wizfits Client.jar">
+      <element id="module-output" name="Witzfits Client" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Server Module/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
