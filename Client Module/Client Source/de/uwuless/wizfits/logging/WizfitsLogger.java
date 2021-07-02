@@ -1,6 +1,7 @@
-package de.uwuless.wizfits;
+package de.uwuless.wizfits.logging;
 
-import de.uwuless.wizfits.utilities.Listener;
+import de.uwuless.wizfits.IWizfitsClient;
+import de.uwuless.wizfits.utilities.IListener;
 
 public enum WizfitsLogger {
 
@@ -8,9 +9,9 @@ public enum WizfitsLogger {
 
     public static final String PREFIX = "[" + IWizfitsClient.GAME_NAME + "-{INFO_TYPE}]: ";
 
-    private static Listener binding;
+    private static IListener binding;
 
-    public static void setBinding(Listener binding) {
+    public static void setBinding(IListener binding) {
         if(WizfitsLogger.binding != null) return;
         WizfitsLogger.binding = binding;
         for(String line : buffer) binding.handle(line);

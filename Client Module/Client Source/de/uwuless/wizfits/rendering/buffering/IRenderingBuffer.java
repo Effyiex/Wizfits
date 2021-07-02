@@ -1,7 +1,7 @@
 package de.uwuless.wizfits.rendering.buffering;
 
 import de.uwuless.wizfits.IWizfitsClient;
-import de.uwuless.wizfits.utilities.Color;
+import de.uwuless.wizfits.rendering.WizfitsColor;
 
 public interface IRenderingBuffer {
 
@@ -9,7 +9,13 @@ public interface IRenderingBuffer {
     int HEIGHT = IWizfitsClient.RESOLUTION_HEIGHT;
 
     void create();
-    void set(int x, int y, Color color);
-    Color get(int x, int y);
+    void set(int x, int y, WizfitsColor color);
+    WizfitsColor get(int x, int y);
+
+    default void setArea(int x, int y, int width, int height, WizfitsColor color) {
+        for(int a = 0; a < width; a++)
+        for(int b = 0; b < height; b++)
+        set(x + a, y + b, color);
+    }
 
 }

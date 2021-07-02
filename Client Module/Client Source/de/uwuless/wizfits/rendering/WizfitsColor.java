@@ -1,12 +1,14 @@
-package de.uwuless.wizfits.utilities;
+package de.uwuless.wizfits.rendering;
 
-public final class Color {
+import de.uwuless.wizfits.logging.WizfitsError;
+
+public final class WizfitsColor {
 
     private float r, g, b, a;
 
     public static final String HEX_CIRCUIT = "0123456789ABCDEF";
 
-    public Color(String hex) {
+    public WizfitsColor(String hex) {
         if(!hex.startsWith(String.valueOf('#'))) hex = '#' + hex;
         switch (hex.length()) {
 
@@ -25,26 +27,26 @@ public final class Color {
                 this.a = 1.0F;
                 break;
 
-            default: new GameError("False Hex-Formatting.").crash();
+            default: new WizfitsError("False Hex-Formatting.").crash();
 
         }
     }
 
-    public Color(int hex) {
+    public WizfitsColor(int hex) {
         this.r = ((hex >> 16) & 0xFF) / 255.0F;
         this.g = ((hex >> 8) & 0xFF) / 255.0F;
         this.b = ((hex) & 0xFF) / 255.0F;
         this.a = ((hex >> 24) & 0xFF) / 255.0F;
     }
 
-    public Color(float r, float g, float b, float a) {
+    public WizfitsColor(float r, float g, float b, float a) {
         this.r = r;
         this.g = g;
         this.b = b;
         this.a = a;
     }
 
-    public Color(float r, float g, float b) {
+    public WizfitsColor(float r, float g, float b) {
         this.r = r;
         this.g = g;
         this.b = b;
