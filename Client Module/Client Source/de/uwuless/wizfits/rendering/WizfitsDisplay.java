@@ -28,7 +28,6 @@ public final class WizfitsDisplay {
     private static final LoopThread CONTROL_THREAD = new LoopThread(() -> {
         debugFPS = debugFPSCount + 1;
         debugFPSCount = 0;
-        WizfitsLogger.INFO.print("Measured FPS: " + debugFPS);
     }, 1);
 
     public static void setMaxFPS(int fps) {

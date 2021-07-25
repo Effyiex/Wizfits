@@ -19,6 +19,12 @@ public final class Atomic<Type> {
         return this;
     }
 
+    public Type getAndSet(Type value) {
+        Type buffer = (Type) this.value;
+        this.value = value;
+        return buffer;
+    }
+
     public void set(Type value) {
         if(this.value == null || !finalized)
         this.value = value;
@@ -26,6 +32,10 @@ public final class Atomic<Type> {
 
     public Type get() {
         return value;
+    }
+
+    public boolean isSet() {
+        return value != null;
     }
 
 }

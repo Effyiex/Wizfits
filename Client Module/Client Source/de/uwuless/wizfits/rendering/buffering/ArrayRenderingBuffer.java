@@ -7,8 +7,8 @@ public class ArrayRenderingBuffer implements IRenderingBuffer {
     protected WizfitsColor[] buffer;
 
     @Override
-    public void create() {
-        this.buffer = new WizfitsColor[WIDTH * HEIGHT];
+    public void define(int width, int height) {
+        this.buffer = new WizfitsColor[width * height];
     }
 
     @Override

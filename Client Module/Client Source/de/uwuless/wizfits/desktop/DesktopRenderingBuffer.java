@@ -11,8 +11,8 @@ public final class DesktopRenderingBuffer implements IRenderingBuffer {
     private BufferedImage buffer;
 
     @Override
-    public void create() {
-        this.buffer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+    public void define(int width, int height) {
+        this.buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
 
     @Override
@@ -25,6 +25,14 @@ public final class DesktopRenderingBuffer implements IRenderingBuffer {
         Graphics2D gl = this.buffer.createGraphics();
         gl.setColor(new java.awt.Color(color.toHex(), true));
         gl.fillRect(x, y, width, height);
+        gl.dispose();
+    }
+
+    @Override
+    public void bindBuffer(int x, int y, int width, int height, IRenderingBuffer buffer) {
+        DesktopRenderingBuffer casted = (DesktopRenderingBuffer) buffer;
+        Graphics2D gl = this.buffer.createGraphics();
+        gl.drawImage(casted.getScreen(), x, y, width, height, null);
         gl.dispose();
     }
 

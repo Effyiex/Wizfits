@@ -3,6 +3,7 @@ package de.uwuless.wizfits.desktop;
 import de.uwuless.wizfits.IWizfitsClient;
 import de.uwuless.wizfits.input.WizfitsInputActions;
 import de.uwuless.wizfits.logging.WizfitsLogger;
+import de.uwuless.wizfits.networking.INetHandler;
 import de.uwuless.wizfits.rendering.IRenderable;
 import de.uwuless.wizfits.rendering.WizfitsDisplay;
 import de.uwuless.wizfits.rendering.buffering.IRenderingBuffer;
@@ -17,6 +18,7 @@ public final class DesktopClient extends JFrame implements IWizfitsClient {
     public static final Dimension INITIAL_SIZE = new Dimension(1024, 576);
 
     public static void main(String[] args) {
+        INetHandler.create(DesktopNetHandler.class);
         WizfitsLogger.setBinding(str -> System.out.println(str));
         IWizfitsClient.create(DesktopClient.class);
         IWizfitsClient.getInstance().start();
