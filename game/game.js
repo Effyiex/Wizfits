@@ -2,6 +2,9 @@
 import TitleScreen from "./scenes/title_screen.js";
 import LoginScreen from "./scenes/login_screen.js";
 
+const SOCKET = new PySocket("127.0.0.1", 785);
+SOCKET.debug = false;
+
 const GAME_CONFIG = {
   width: 1920,
   height: 1080,

@@ -50,5 +50,8 @@ class WizfitsDatabase:
         local_reader = open(self.local_file, "rb")
         saved_bytes = local_reader.read()
         local_reader.close()
-        saved_string = byte_shift(saved_bytes).decode("utf-8")
-        self.entries = json.loads(saved_string)
+        if len(saved_bytes) <= 0:
+            self.entries = []
+        else:
+            saved_string = byte_shift(saved_bytes).decode("utf-8")
+            self.entries = json.loads(saved_string)
