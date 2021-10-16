@@ -16,7 +16,7 @@ class LoginScreen extends Phaser.Scene {
     this.passwordInput = document.createElement("input");
     this.passwordInput.placeholder = "Password here...";
     this.passwordInput.type = "password";
-    DOM_CONTAINER.set_place_origin(0.5, 0);
+    DOM_CONTAINER.setPlaceOrigin(0.5, 0);
     DOM_CONTAINER.load(this.usernameInput, width / 2, height / 2 - RENDER_UNIT * 4.5, RENDER_UNIT * 40, RENDER_UNIT * 3);
     DOM_CONTAINER.load(this.passwordInput, width / 2, height / 2, RENDER_UNIT * 40, RENDER_UNIT * 3);
     this.add.rectangle(width / 2, height / 2, RENDER_UNIT * 64, RENDER_UNIT * 48, 0x111111);

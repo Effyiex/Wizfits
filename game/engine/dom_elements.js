@@ -14,8 +14,8 @@ class WizfitsDomContainer {
     this.div.style.padding = '0';
     this.div.style.margin = '0';
     this.elements = [];
-    this.place_origin_x = 0;
-    this.place_origin_y = 0;
+    this.placeOriginX = 0;
+    this.placeOriginY = 0;
   }
 
   create(width, height) {
@@ -25,20 +25,20 @@ class WizfitsDomContainer {
   }
 
   unload() {
-    this.set_place_origin(0, 0);
+    this.setPlaceOrigin(0, 0);
     for(var i = 0; i < this.elements.length; i++)
     this.div.removeChild(this.elements[i]);
     this.elements = [];
   }
 
-  set_place_origin(x, y) {
-    this.place_origin_x = x;
-    this.place_origin_y = y;
+  setPlaceOrigin(x, y) {
+    this.placeOriginX = x;
+    this.placeOriginY = y;
   }
 
   load(element, x, y, width, height) {
-    x -= width * this.place_origin_x;
-    y -= height * this.place_origin_y;
+    x -= width * this.placeOriginX;
+    y -= height * this.placeOriginY;
     x = new String(100.0 / this.displayWidth * x) + '%';
     y = new String(100.0 / this.displayHeight * y) + '%';
     width = new String(100.0 / this.displayWidth * width) + '%';
