@@ -27,7 +27,12 @@ def generate_uuid():
 
 def registration(args):
     if 2 <= len(args):
-        if 4 <= len(args[0]):
+        already_exists = False
+        for account in DATABASE.entries:
+            if account.get("username").lower() == args[0].lower():
+                already_exists = True
+                break
+        if 4 <= len(args[0]) and not already_exists:
             if 6 <= len(args[1]):
                 uuid = None
                 account = {
@@ -36,21 +41,21 @@ def registration(args):
                     "uuid": generate_uuid()
                 }
                 DATABASE.add_entry(account)
-                return JsPacket("SUCCESS", account.get("uuid"))
-    return JsPacket("ERROR: registration failed.")
+                return pyjsps.JsPacket("SUCCESS", account.get("uuid"))
+    return pyjsps.JsPacket("ERROR: registration failed.")
 
 def login(args):
     if 2 <= len(args):
         for account in DATABASE.entries:
-            if account.get("username") == args[0]:
+            if account.get("username").lower() == args[0].lower():
                 if account.get("password") == args[1]:
-                    return JsPacket("SUCCESS", account.get("uuid"))
-    return JsPacket("ERROR: login failed.")
+                    return pyjsps.JsPacket("SUCCESS", account.get("uuid"))
+    return pyjsps.JsPacket("ERROR: login failed.")
 
 def connection(packet):
     if packet.label == "REGISTRATION": return registration(packet.args)
     elif packet.label == "LOGIN": return login(packet.args)
-    else: return JsPacket("ERROR: unknown request.")
+    else: return pyjsps.JsPacket("ERROR: unknown request.")
 
 SOCKET = pyjsps.JsSocket(PORT, connection)
 

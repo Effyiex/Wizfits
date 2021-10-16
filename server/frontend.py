@@ -11,7 +11,7 @@ if not DIR.endswith('/'): DIR += '/'
 DIR += "game/"
 
 PORT = 3000
-SOCKET = socket()
+SOCKET = socket(AF_INET, SOCK_STREAM)
 
 def receive():
     while True:
