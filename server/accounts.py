@@ -10,7 +10,7 @@ pyjsps = require_url("https://effyiex.github.io/PyJsPs/pyjsps.py")
 
 DATABASE = WizfitsDatabase("accounts")
 PORT = 3001
-UUID_LENGTH = 16
+UUID_LENGTH = 64
 
 def generate_uuid():
     uuid = None
@@ -41,21 +41,27 @@ def registration(args):
                     "uuid": generate_uuid()
                 }
                 DATABASE.add_entry(account)
-                return pyjsps.JsPacket("SUCCESS", account.get("uuid"))
-    return pyjsps.JsPacket("ERROR: registration failed.")
+                return pyjsps.JsPacket("SUCCESS", [account.get("uuid")])
+    return pyjsps.JsPacket("ERROR", ["registration failed."])
 
 def login(args):
     if 2 <= len(args):
         for account in DATABASE.entries:
             if account.get("username").lower() == args[0].lower():
                 if account.get("password") == args[1]:
-                    return pyjsps.JsPacket("SUCCESS", account.get("uuid"))
-    return pyjsps.JsPacket("ERROR: login failed.")
+                    return pyjsps.JsPacket("SUCCESS", [account.get("uuid")])
+    return pyjsps.JsPacket("ERROR", ["login failed."])
+
+def get_user_from_uuid(uuid):
+    for account in DATABASE.entries:
+        if account.get("uuid") == uuid:
+            return account
+    return None
 
 def connection(packet):
     if packet.label == "REGISTRATION": return registration(packet.args)
     elif packet.label == "LOGIN": return login(packet.args)
-    else: return pyjsps.JsPacket("ERROR: unknown request.")
+    else: return pyjsps.JsPacket("ERROR", ["unknown request."])
 
 SOCKET = pyjsps.JsSocket(PORT, connection)
 

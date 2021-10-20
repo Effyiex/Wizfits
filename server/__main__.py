@@ -39,7 +39,9 @@ if __name__ == "__main__":
     print("[Wizfits-Servers]: Starting all Server-Systems...")
     import accounts
     import frontend
+    import clans
     accounts.start_server()
+    clans.start_server()
     frontend.start_server()
     print("[Wizfits-Servers]: Finished starting all servers.")
     print("[Wizfits-Servers]: Use '?' or \"help\" for help.")
